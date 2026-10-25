@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ExamRadar — never miss an exam</title>
+<meta name="description" content="Finds exams, deadlines and events in your emails and puts them on a calendar. Runs on this computer.">
+<meta name="theme-color" content="#f7f7f5">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/minimal.css">
+<!-- Apply the saved theme before first paint so there is no flash. -->
+<script>try{var t=localStorage.getItem('examradar:theme');if(t!=='system')document.documentElement.setAttribute('data-theme',{minimal:1,neon:1,aurora:1,sunset:1,paper:1}[t]?t:'minimal')}catch(e){document.documentElement.setAttribute('data-theme','minimal')}</script>
+</head>
+<body>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5 2.5 20h19L12 3.5zM12 10v4.5M12 17.5h.01"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M4.5 20h15"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18c1.7 0 2-1.2 1.4-2.2-.7-1.2 0-2.3 1.3-2.3H17a4 4 0 004-4c0-5-4-9.5-9-9.5z"/><path d="M7.5 11h.01M10.5 7.5h.01M15 8h.01"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 1112 0c0 5 2 6.5 2 6.5H4S6 14 6 9zM10 19a2 2 0 004 0"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-l" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol>
+  <symbol id="i-r" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 114 2c-.9.7-1.5 1.2-1.5 2.3M12 17h.01"/></symbol>
+  <symbol id="i-install" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="14" rx="2.5"/><path d="M12 7v6m0 0-2.5-2.5M12 13l2.5-2.5M8 21h8"/></symbol>
+</svg>
+
+<div class="bg-fx" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><div class="grid-fx"></div></div>
+
+<div class="app">
+
+  <!-- ============================================================ sidebar -->
+  <aside class="side" id="side" aria-label="Subjects and status">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+        <defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent2)"/></linearGradient></defs>
+        <circle cx="24" cy="24" r="21" fill="none" stroke="url(#bg1)" stroke-width="2.5"/>
+        <circle cx="24" cy="24" r="13" fill="none" stroke="url(#bg1)" stroke-width="1.5" opacity=".6"/>
+        <circle cx="24" cy="24" r="5" fill="url(#bg1)"/>
+        <g style="transform-origin:24px 24px;animation:rot 3.5s linear infinite"><path d="M24 24 L24 3 A21 21 0 0 1 43 15 Z" fill="url(#bg1)" opacity=".35"/></g>
+        <circle cx="35" cy="14" r="2.6" fill="var(--k-exam)"/>
+      </svg>
+      <div><b>ExamRadar</b><span>runs on this computer</span></div>
+    </div>
+
+    <button id="openImport" class="btn primary" type="button"><svg class="ico"><use href="#i-plus"/></svg>Import emails</button>
+
+    <nav aria-label="Subjects"><h4>Subjects</h4><div id="subjects"></div></nav>
+
+    <div class="side-foot">
+      <p id="ollama" aria-live="polite"></p>
+      <p>Press <kbd>?</kbd> for keyboard shortcuts.</p>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <!-- ============================================================ main -->
+  <div class="main">
+    <header class="top">
+      <button class="btn ghost icon menu-btn" id="menuBtn" type="button" aria-label="Open subjects menu" aria-controls="side" aria-expanded="false"><svg class="ico"><use href="#i-menu"/></svg></button>
+      <div class="grow">
+        <h1 id="pageTitle">Schedule</h1>
+        <span id="filterChip" class="chip" hidden></span>
+      </div>
+      <button id="openImportTop" class="btn primary sm" type="button"><svg class="ico"><use href="#i-plus"/></svg><span class="hide-s">Import emails</span></button>
+      <button id="alertBtn" class="btn ghost sm icon" type="button" aria-pressed="false" aria-label="Turn on desktop alerts"><svg class="ico"><use href="#i-bell"/></svg></button>
+      <button id="installBtn" class="btn sm" type="button" hidden><svg class="ico"><use href="#i-install"/></svg><span class="hide-s">Install app</span></button>
+      <button id="helpBtn" class="btn ghost sm icon hide-s" type="button" aria-label="Keyboard shortcuts"><svg class="ico"><use href="#i-help"/></svg></button>
+      <div class="rel">
+        <button id="themeBtn" class="btn sm" type="button" aria-haspopup="true" aria-expanded="false"><svg class="ico"><use href="#i-palette"/></svg><span class="hide-s">Theme</span></button>
+        <div id="themeMenu" class="menu" role="menu" hidden></div>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <div id="err" hidden></div>
+
+      <div id="busy" class="glass busy" hidden>
+        <div class="hd"><span class="spin"></span><span>Reading your emails on this computer…</span>
+          <button id="cancelRun" class="btn sm" type="button">Cancel</button></div>
+        <div class="bar indet" id="barWrap"><i id="bar"></i></div>
+        <p id="status" aria-live="polite"></p>
+      </div>
+
+      <section class="hero" aria-label="Overview">
+        <div class="glass radar-card">
+          <h3>Radar <span class="muted" style="letter-spacing:0;text-transform:none;font-weight:500">next 60 days</span><span class="live">● scanning</span></h3>
+          <div class="radar" id="radar"></div>
+          <div class="radar-cap" id="radarCap" aria-live="polite"></div>
+        </div>
+        <div class="hero-right">
+          <div class="glass next" id="next"></div>
+          <div class="stats">
+            <div class="glass stat" style="--c:var(--accent)"><small>On calendar</small><b id="stEvents">0</b><span>exams, deadlines, events</span></div>
+            <div class="glass stat" id="stClashBox"><small>Clashes</small><b id="stClash">0</b><span id="stClashDesc">same-day overlaps</span></div>
+            <div class="glass stat" id="stReviewBox"><small>Need checking</small><b id="stReview">0</b><span>never added by guesswork</span></div>
+            <div class="glass stat" style="--c:var(--k-meeting)"><small>Emails read</small><b id="stEmails">–</b><span id="stEmailsDesc">paste or connect Gmail</span></div>
+          </div>
+        </div>
+      </section>
+
+      <div id="clashes" class="clashes" hidden></div>
+
+      <section class="glass panel">
+        <div class="tabs" role="tablist" id="mainTabs" aria-label="Views">
+          <button role="tab" class="tab on" data-tab="schedule" aria-selected="true"><svg class="ico"><use href="#i-list"/></svg>Schedule</button>
+          <button role="tab" class="tab" data-tab="cal" aria-selected="false"><svg class="ico"><use href="#i-cal"/></svg>Calendar</button>
+          <button role="tab" class="tab" data-tab="agenda" aria-selected="false"><svg class="ico"><use href="#i-list"/></svg>Agenda</button>
+          <button role="tab" class="tab" data-tab="review" aria-selected="false"><svg class="ico"><use href="#i-alert"/></svg>Needs checking <span id="reviewCount" class="badge" hidden>0</span></button>
+        </div>
+
+        <div id="tabSchedule" class="pad" role="tabpanel"></div>
+        <div id="tabCal" role="tabpanel" hidden>
+          <div class="toolbar">
+            <div class="l">
+              <div class="seg" role="group" aria-label="Navigate">
+                <button id="prev" type="button" aria-label="Previous"><svg class="ico" style="width:16px;height:16px"><use href="#i-l"/></svg></button>
+                <button id="today" type="button">Today</button>
+                <button id="next-btn" type="button" aria-label="Next"><svg class="ico" style="width:16px;height:16px"><use href="#i-r"/></svg></button>
+              </div>
+              <h2 id="calTitle" class="cal-title" aria-live="polite"></h2>
+            </div>
+            <div class="r">
+              <div class="seg" id="colorSwitch" role="group" aria-label="Colour events by">
+                <button class="on" type="button" data-color="kind" title="Colour by type">Type</button>
+                <button type="button" data-color="subject" title="Colour by subject">Subject</button>
+              </div>
+              <div class="seg" id="viewSwitch" role="group" aria-label="Calendar view">
+                <button class="on" type="button" data-view="month">Month</button>
+                <button type="button" data-view="week">Week</button>
+              </div>
+              <button id="dl" class="btn sm" type="button" disabled><svg class="ico"><use href="#i-down"/></svg>.ics</button>
+            </div>
+          </div>
+          <div id="legend" class="legend" aria-label="Filter by type"></div>
+          <div id="calBody" class="cal"></div>
+          <div id="dayPanel" class="daypanel"></div>
+        </div>
+        <div id="tabAgenda" class="pad" role="tabpanel" hidden></div>
+        <div id="tabReview" class="pad" role="tabpanel" hidden></div>
+      </section>
+
+      <p class="foot">Your last calendar is kept in this browser only.
+        <button id="forget" class="linkbtn" type="button">Clear saved calendar</button></p>
+    </main>
+  </div>
+</div>
+
+<!-- mobile bottom navigation -->
+<nav class="bnav" id="bnav" aria-label="Main">
+  <button type="button" data-tab="schedule" class="on"><svg class="ico"><use href="#i-list"/></svg>Schedule</button>
+  <button type="button" data-tab="cal"><svg class="ico"><use href="#i-cal"/></svg>Calendar</button>
+  <button type="button" data-tab="agenda"><svg class="ico"><use href="#i-list"/></svg>Agenda</button>
+  <button type="button" data-tab="review"><svg class="ico"><use href="#i-alert"/></svg>Check<span id="reviewCountM" class="badge" hidden>0</span></button>
+  <button type="button" id="bnavImport"><svg class="ico"><use href="#i-plus"/></svg>Import</button>
+</nav>
+
+<!-- ============================================================ import dialog -->
+<dialog id="impModal" aria-labelledby="impTitle">
+  <div class="modal" style="width:min(720px,calc(100vw - 24px))">
+    <form method="dialog"><button class="btn ghost sm icon x" aria-label="Close"><svg class="ico"><use href="#i-x"/></svg></button></form>
+    <h3 id="impTitle">Import emails</h3>
+    <div class="seg" id="srcTabs" role="tablist" style="display:flex;margin-bottom:14px">
+      <button role="tab" class="on" data-src="paste" aria-selected="true" style="flex:1">Paste / sample</button>
+      <button role="tab" data-src="gmail" aria-selected="false" style="flex:1"><svg class="ico" style="width:15px;height:15px;vertical-align:-3px;margin-right:4px"><use href="#i-mail"/></svg>Gmail</button>
+    </div>
+
+    <!-- paste -->
+    <div id="srcPaste" class="stack">
+      <label class="field" for="emails">Paste emails <small>(separate several with a line of ---)</small>
+        <textarea id="emails" rows="10" class="mono" spellcheck="false" style="font-size:12.5px;line-height:1.55;resize:vertical"
+          placeholder="Subject: End semester exam schedule&#10;Date: 26 Oct 2026&#10;&#10;Data Structures - 16 November 2026, 10:00 AM to 1:00 PM, Hall B&#10;&#10;---&#10;&#10;Subject: ..."></textarea>
+      </label>
+      <div class="actions" style="margin:0">
+        <button id="go" class="btn primary" type="button">Find my exams</button>
+        <button id="sample" class="btn" type="button" hidden>Load sample emails</button>
+        <button id="inbox" class="btn" type="button" hidden>Load fetched inbox</button>
+        <button id="clear" class="btn ghost" type="button">Clear</button>
+      </div>
+    </div>
+
+    <!-- gmail -->
+    <div id="srcGmail" class="stack" hidden>
+      <div class="alert t-accent" role="note"><div class="grow">Read-only. Your password goes only to this app on your computer, is used once to read your inbox from Google, and is never saved. Nothing is marked as read, moved or deleted.</div></div>
+      <ol class="steps" aria-label="Gmail sign-in steps">
+        <li class="on">Turn on 2-Step</li><li class="on">Make app password</li><li>Paste it here</li><li>Pick emails</li>
+      </ol>
+      <details class="acc">
+        <summary>Step-by-step: get your Gmail app password (2 minutes, one time)</summary>
+        <div>
+          <ol>
+            <li>Open <a href="https://myaccount.google.com/security" target="_blank" rel="noopener">myaccount.google.com/security</a> and sign in to the Google account you use for college mail.</li>
+            <li>Under <strong>“How you sign in to Google”</strong>, open <strong>2-Step Verification</strong> and turn it on. Skip this if it already says <em>On</em>.</li>
+            <li>Open <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener">myaccount.google.com/apppasswords</a>. (Can’t find it? Search “App passwords” in your Google Account.)</li>
+            <li>Type the name <strong>ExamRadar</strong> and press <strong>Create</strong>.</li>
+            <li>Google shows <strong>16 letters</strong> like <code>abcd efgh ijkl mnop</code>. Copy them now: Google shows them only once.</li>
+            <li>Come back here, type your <strong>full Gmail address</strong>, paste the 16 letters into <strong>App password</strong> (spaces are fine) and press <strong>Connect &amp; fetch emails</strong>.</li>
+            <li>Emails that mention exams or deadlines are ticked for you. Untick anything you don’t want read, then press <strong>Find my exams</strong>.</li>
+            <li>Done? Delete the “ExamRadar” password on the same Google page and access stops immediately.</li>
+          </ol>
+          <p style="margin-top:10px">Use the app password, never your normal Google password. It only allows mail access, not the rest of your account.</p>
+        </div>
+      </details>
+
+      <form id="gForm" class="stack" autocomplete="on">
+        <div class="grid2">
+          <label class="field" for="gUser">Gmail address<input id="gUser" type="email" autocomplete="username" placeholder="you@gmail.com" required></label>
+          <label class="field" for="gPass">App password<input id="gPass" type="password" autocomplete="off" placeholder="abcd efgh ijkl mnop" required></label>
+          <label class="field" for="gDays">Look back
+            <select id="gDays"><option value="7">7 days</option><option value="14">14 days</option><option value="30" selected>30 days</option><option value="60">60 days</option><option value="90">90 days</option><option value="180">6 months</option></select></label>
+          <label class="field" for="gLimit">Newest emails to read
+            <select id="gLimit"><option value="50">50</option><option value="150" selected>150</option><option value="300">300</option></select></label>
+        </div>
+        <details class="acc"><summary>Using another provider? (IMAP server)</summary>
+          <div><label class="field" for="gHost">IMAP server<input id="gHost" value="imap.gmail.com"></label></div></details>
+        <button id="gFetch" class="btn primary" type="submit"><span class="spin" id="gSpin" hidden></span><span id="gFetchText">Connect &amp; fetch emails</span></button>
+      </form>
+
+      <div id="gErr" hidden></div>
+      <details class="acc"><summary>It didn’t connect. What now?</summary>
+        <div><ul>
+          <li><strong>“Gmail refused the login”</strong>: you used your normal password, mistyped the 16 letters, or 2-Step Verification is off. Make a fresh app password and paste it again.</li>
+          <li><strong>No “App passwords” page</strong>: 2-Step Verification is off, Advanced Protection is on, or your school/company admin disabled it. Use the Paste tab instead.</li>
+          <li><strong>“Could not connect”</strong>: check your internet and that a firewall or VPN is not blocking port 993.</li>
+          <li><strong>Still stuck</strong>: in Gmail open Settings → See all settings → Forwarding and POP/IMAP and make sure IMAP is enabled.</li>
+        </ul></div></details>
+
+      <div id="gList" class="stack" hidden>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+          <b id="gCount" style="font-size:14px"></b>
+          <div class="seg">
+            <button type="button" data-pick="relevant">Likely</button><button type="button" data-pick="all">All</button><button type="button" data-pick="none">None</button>
+          </div>
+        </div>
+        <ul id="gItems" class="mail-list"></ul>
+        <button id="gRun" class="btn primary" type="button">Find my exams</button>
+      </div>
+    </div>
+
+    <details class="acc" style="margin-top:14px">
+      <summary>Model &amp; dates</summary>
+      <div class="grid2">
+        <label class="field" for="model">Ollama model
+          <span style="display:flex;gap:8px"><select id="model" style="flex:1"></select><button id="refresh" class="btn sm" type="button">Refresh</button></span></label>
+        <label class="field" for="sent">Pasted emails were received on<input type="date" id="sent"><small>Used for “tomorrow” and “Friday”. Gmail emails use their own date.</small></label>
+      </div>
+    </details>
+  </div>
+</dialog>
+
+<!-- ============================================================ event details -->
+<dialog id="evModal" aria-label="Event details">
+  <div class="modal">
+    <form method="dialog"><button class="btn ghost sm icon x" aria-label="Close"><svg class="ico"><use href="#i-x"/></svg></button></form>
+    <div id="evBody" class="stack"></div>
+    <div class="actions">
+      <a id="evGoogle" class="btn primary sm" target="_blank" rel="noopener">Add to Google Calendar</a>
+      <a id="evOutlook" class="btn sm" target="_blank" rel="noopener">Outlook</a>
+      <button id="evIcs" class="btn sm" type="button"><svg class="ico"><use href="#i-down"/></svg>This event (.ics)</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- ============================================================ shortcuts -->
+<dialog id="helpModal" aria-label="Keyboard shortcuts">
+  <div class="modal" style="width:min(460px,calc(100vw - 24px))">
+    <form method="dialog"><button class="btn ghost sm icon x" aria-label="Close"><svg class="ico"><use href="#i-x"/></svg></button></form>
+    <h3>Keyboard shortcuts</h3>
+    <div class="kbd-grid">
+      <span><kbd>←</kbd> <kbd>→</kbd></span><span>Previous / next month or week</span>
+      <span><kbd>T</kbd></span><span>Jump to today</span>
+      <span><kbd>M</kbd> <kbd>W</kbd></span><span>Month / week view</span>
+      <span><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd></span><span>Schedule / Calendar / Agenda / Needs checking</span>
+      <span><kbd>/</kbd></span><span>Search the agenda</span>
+      <span><kbd>I</kbd></span><span>Import emails</span>
+      <span><kbd>Esc</kbd></span><span>Close dialogs</span>
+    </div>
+  </div>
+</dialog>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+
+<script src="/js/reminders.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

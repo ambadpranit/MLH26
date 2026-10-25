@@ -1,0 +1,101 @@
+[
+  {
+    "source": "03_assignment.eml",
+    "subject": "DBMS assignment submission",
+    "kind": "event",
+    "title": "DBMS assignment submission",
+    "date_text": "30/10/2026",
+    "time_text": "5:00 PM",
+    "venue": "portal",
+    "quote": "Please submit the DBMS assignment on the portal by 30/10/2026, 5:00 PM.",
+    "date": "2026-10-30",
+    "start": [
+      17,
+      0
+    ],
+    "end": null
+  },
+  {
+    "source": "02_techfest.eml",
+    "subject": "Aarambh tech fest - registration open",
+    "kind": "event",
+    "title": "Last date for registration: 3 November 2026.",
+    "date_text": "3 November 2026",
+    "time_text": "",
+    "venue": "",
+    "quote": "Last date for registration: 3 November 2026.",
+    "date": "2026-11-03",
+    "start": null,
+    "end": null
+  },
+  {
+    "source": "02_techfest.eml",
+    "subject": "Aarambh tech fest - registration open",
+    "kind": "event",
+    "title": "Tech fest Aarambh will be held on 7 November 2026 at 9:00 AM in the Main Auditorium.",
+    "date_text": "7 November 2026",
+    "time_text": "9:00 AM",
+    "venue": "Main Auditorium",
+    "quote": "Tech fest Aarambh will be held on 7 November 2026 at 9:00 AM in the Main Auditorium.",
+    "date": "2026-11-07",
+    "start": [
+      9,
+      0
+    ],
+    "end": null
+  },
+  {
+    "source": "01_datesheet.eml",
+    "subject": "End semester examination schedule",
+    "kind": "exam",
+    "title": "Data Structures",
+    "date_text": "16 November 2026",
+    "time_text": "10:00 AM to 1:00 PM",
+    "venue": "Hall B",
+    "quote": "The end semester examinations will be held as follows:",
+    "date": "2026-11-16",
+    "start": [
+      10,
+      0
+    ],
+    "end": [
+      13,
+      0
+    ]
+  },
+  {
+    "source": "01_datesheet.eml",
+    "subject": "End semester examination schedule",
+    "kind": "exam",
+    "title": "DBMS",
+    "date_text": "19/11/2026",
+    "time_text": "2:00 PM - 5:00 PM",
+    "venue": "Hall B",
+    "quote": "The end semester examinations will be held as follows:",
+    "date": "2026-11-19",
+    "start": [
+      14,
+      0
+    ],
+    "end": [
+      17,
+      0
+    ]
+  },
+  {
+    "source": "07_seminar.eml",
+    "subject": "Guest seminar on machine learning",
+    "kind": "event",
+    "title": "Guest seminar on machine learning",
+    "date_text": "12 December",
+    "time_text": "11:30 AM",
+    "venue": "Seminar Hall",
+    "quote": "Guest seminar on 12 December at 11:30 AM in Seminar Hall",
+    "date": "2026-12-12",
+    "start": [
+      11,
+      30
+    ],
+    "end": null
+  }
+]

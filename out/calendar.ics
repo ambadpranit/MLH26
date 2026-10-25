@@ -1,0 +1,76 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//mail2cal//local//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:1302a08df14f1c19e83b@mail2cal
+DTSTAMP:20261025T054341Z
+SUMMARY:DBMS assignment submission
+DTSTART:20261030T170000
+DTEND:20261030T180000
+LOCATION:portal
+DESCRIPTION:From email: DBMS assignment submission\nQuote: Please submit th
+ e DBMS assignment on the portal by 30/10/2026\, 5:00 PM.
+END:VEVENT
+BEGIN:VEVENT
+UID:f26c539226b3edbb4066@mail2cal
+DTSTAMP:20261025T054341Z
+SUMMARY:Last date for registration: 3 November 2026.
+DTSTART;VALUE=DATE:20261103
+DTEND;VALUE=DATE:20261104
+DESCRIPTION:From email: Aarambh tech fest - registration open\nQuote: Last 
+ date for registration: 3 November 2026.
+END:VEVENT
+BEGIN:VEVENT
+UID:ee32a143d235081905a3@mail2cal
+DTSTAMP:20261025T054341Z
+SUMMARY:Tech fest Aarambh will be held on 7 November 2026 at 9:00 AM in the
+  Main Auditorium.
+DTSTART:20261107T090000
+DTEND:20261107T100000
+LOCATION:Main Auditorium
+DESCRIPTION:From email: Aarambh tech fest - registration open\nQuote: Tech 
+ fest Aarambh will be held on 7 November 2026 at 9:00 AM in the Main Audito
+ rium.
+END:VEVENT
+BEGIN:VEVENT
+UID:eb8744e35c7043f6125f@mail2cal
+DTSTAMP:20261025T054341Z
+SUMMARY:Data Structures
+DTSTART:20261116T100000
+DTEND:20261116T130000
+LOCATION:Hall B
+DESCRIPTION:From email: End semester examination schedule\nQuote: The end s
+ emester examinations will be held as follows:
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:0002bff05fbec82a7083@mail2cal
+DTSTAMP:20261025T054341Z
+SUMMARY:DBMS
+DTSTART:20261119T140000
+DTEND:20261119T170000
+LOCATION:Hall B
+DESCRIPTION:From email: End semester examination schedule\nQuote: The end s
+ emester examinations will be held as follows:
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2462c19a024bab5e88bc@mail2cal
+DTSTAMP:20261025T054341Z
+SUMMARY:Guest seminar on machine learning
+DTSTART:20261212T113000
+DTEND:20261212T123000
+LOCATION:Seminar Hall
+DESCRIPTION:From email: Guest seminar on machine learning\nQuote: Guest sem
+ inar on 12 December at 11:30 AM in Seminar Hall
+END:VEVENT
+END:VCALENDAR

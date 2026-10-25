@@ -1,0 +1,22 @@
+{
+  "01_datesheet.eml": [
+    "2026-11-16",
+    "2026-11-19"
+  ],
+  "02_techfest.eml": [
+    "2026-11-07",
+    "2026-11-03"
+  ],
+  "03_assignment.eml": [
+    "2026-10-30"
+  ],
+  "04_viva_ambiguous.eml": [],
+  "05_meeting_relative.eml": [],
+  "06_library.eml": [],
+  "07_seminar.eml": [
+    "2026-12-12"
+  ],
+  "08_os_exam.eml": [
+    "2026-11-16"
+  ]
+}

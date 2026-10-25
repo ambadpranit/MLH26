@@ -1,0 +1,70 @@
+{
+  "app.py": {
+    "mtime": 1792918640.9983563,
+    "seen": 1792919161.7739766,
+    "ast_hash": "f47b5474bd5de17fb243a628347cddf3",
+    "semantic_hash": "f47b5474bd5de17fb243a628347cddf3"
+  },
+  "browser_check.py": {
+    "mtime": 1792918640.9575887,
+    "seen": 1792919161.7741947,
+    "ast_hash": "ff0923694acdf7d7568af4bc776b5556",
+    "semantic_hash": "ff0923694acdf7d7568af4bc776b5556"
+  },
+  "mail2cal.py": {
+    "mtime": 1792918640.9357674,
+    "seen": 1792919161.7743542,
+    "ast_hash": "4dd9976d527d8ef088b3b0b1575fb6de",
+    "semantic_hash": "4dd9976d527d8ef088b3b0b1575fb6de"
+  },
+  "make_samples.py": {
+    "mtime": 1792918640.9518838,
+    "seen": 1792919161.774521,
+    "ast_hash": "5f42e4c82b5a874930c7211fb4c2cb0c",
+    "semantic_hash": "5f42e4c82b5a874930c7211fb4c2cb0c"
+  },
+  "out/events.json": {
+    "mtime": 1792918641.0835474,
+    "seen": 1792919161.7746763,
+    "ast_hash": "4a290e0f5130925b627082f3ab347dcc",
+    "semantic_hash": "4a290e0f5130925b627082f3ab347dcc",
+    "ast_empty": true
+  },
+  "sample_emails/expected.json": {
+    "mtime": 1792918641.1358616,
+    "seen": 1792919161.7746797,
+    "ast_hash": "c1ff861a9a8162dccd4496bd92b0ba22",
+    "semantic_hash": "c1ff861a9a8162dccd4496bd92b0ba22",
+    "ast_empty": true
+  },
+  "test_app.py": {
+    "mtime": 1792918640.9382603,
+    "seen": 1792919161.7746825,
+    "ast_hash": "e4384d972ef153e8a67deec06c16a2ae",
+    "semantic_hash": "e4384d972ef153e8a67deec06c16a2ae"
+  },
+  "test_mail2cal.py": {
+    "mtime": 1792918640.9537618,
+    "seen": 1792919161.7748072,
+    "ast_hash": "0f754d2892e94403ab408e52d2f48cb5",
+    "semantic_hash": "0f754d2892e94403ab408e52d2f48cb5"
+  },
+  "web/js/app.js": {
+    "mtime": 1792918641.0671773,
+    "seen": 1792919161.774933,
+    "ast_hash": "c085ca1d77e9dbf966beacc526949fb7",
+    "semantic_hash": "c085ca1d77e9dbf966beacc526949fb7"
+  },
+  "web/js/reminders.js": {
+    "mtime": 1792918641.0691822,
+    "seen": 1792919161.7750556,
+    "ast_hash": "a41c4412c1a7110a1a6baa91a93fa510",
+    "semantic_hash": "a41c4412c1a7110a1a6baa91a93fa510"
+  },
+  "web/sw.js": {
+    "mtime": 1792918641.0059805,
+    "seen": 1792919161.7751644,
+    "ast_hash": "037dc38dc7817c93a4c1d8b0bb7351e4",
+    "semantic_hash": "037dc38dc7817c93a4c1d8b0bb7351e4"
+  }
+}
