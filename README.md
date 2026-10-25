@@ -2,7 +2,7 @@
 
 A local-first "exam radar": it reads your emails (pasted, sample, or pulled read-only from Gmail), uses a small on-device LLM to copy out exams, deadlines and events, verifies every date in code, shows them on a calendar in your browser, and **reminds you** before each exam or deadline.
 
-|  **Track:** Best Local Agentic Tool  |  **Team:** Guaranteed Loosers - Prajesh Sivakumar + Shounak Pimparkar + Abhimanyu Suwalka + Pranit Ambad
+|  **Track:** Best Local Agentic Tool  |  **Team:** Guaranteed Losers - Prajesh Sivakumar + Shounak Pimparkar + Abhimanyu Suwalka + Pranit Ambad
 
 ## Problem Statement & Target User
 
