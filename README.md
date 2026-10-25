@@ -8,7 +8,7 @@ A local-first "exam radar": it reads your emails (pasted, sample, or pulled read
 
 **Who:** College and university students whose exam date sheets, quiz notices, assignment deadlines, viva slots and fest announcements arrive scattered across dozens of emails.
 
-**Why it hurts:** Dates are written in many styles (`30/10/2026`, `3 November 2026`, "next Friday"), buried in long mails, and easy to miss. A missed exam or submission is costly. Cloud AI tools would need access to the student's whole inbox, which is a privacy concern, and a wrongly guessed date is worse than no date at all.
+**Why it hurts:** Dates are written in many styles (`30/10/2026`, `3 November 2026`, "next Friday"), buried in very long mails, and easy to miss. A missed exam or submission is costly. Cloud AI tools would need access to the student's whole inbox, which is a privacy concern, and a wrongly guessed date is worse than no date at all.
 
 ## Approach, Architecture & Demo
 
